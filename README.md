@@ -1,6 +1,58 @@
 # IntrusionDetectionSystem
-Autoencoder based intrusion detection system trained and tested with the CICIDS2017 data set.  
+Autoencoder based intrusion detection system trained and tested with the CICIDS2017 data set.  Currently implemented using Python and Tensorflow 2.0.
 
+## Current Best Network
+
+The current best network uses a two-layer sparse autoencoder with L1 kernel regularization on the hidden layer.  
+
+The ability of the network (trainined only on Day 1 BENIGN data) to detect specific attacks it had never seen before is shown below:  
+
+|Attack	|Label  | 	Anomaly|
+|-------|:-----:|:--------:|
+|BENIGN	|FALSE	| 2075854
+|	      |TRUE  |	197243
+|Bot	  |FALSE	| 1677
+|	      |TRUE | 	289
+|DDoS	  |TRUE	|  128027
+|DoS GoldenEye	|TRUE	 |  10293
+|DoS Hulk	| TRUE  |	231073
+|DoS Slowhttptest |	TRUE	|  5499
+|DoS slowloris |	TRUE	|  5276
+|	       | FALSE	|  520
+|FTP-Patator	|TRUE	|  3974
+|	       |FALSE	 |  3964
+|Heartbleed |	TRUE	|  11
+|Infiltration |	TRUE |	29
+|	       | FALSE	|  7
+|PortScan	|TRUE	|  158930
+|SSH-Patator |	TRUE	|  2979
+|	           |FALSE	|  2918
+|Web Attack Brute Force	| TRUE	|  1507
+|Web Attack SQL Injection |	TRUE	 | 21
+|Web Attack XSS	|  TRUE   |	652
+
+
+The results can be reproduced by first downloading the CICIDS2017 dataset and pre-processing it using the encoding that is hard-coded in the DataEncoding.py file:
+
+'''python
+path = WHEREVER_YOU_PUT_THE_CSV_FILES
+encoding = DataE.AUTOENCODER_PREPROCESS
+PreProc.process_folder(path, encoding)
+'''
+
+A network can then be trained and tested using the following commands:
+'''python
+pickles_path = "Pickles/New/"
+params = HyperP.cAutoHyper("test.h5",[65, 64],[0.005, 0], [0.1, 0.3, 0])
+encoding = DataE.AUTOENCODER_PREPROCESS
+
+train_file = "Monday-WorkingHours.pkl"
+train_data = pd.read_pickle(pickles_path + train_file)
+model = IDS.train(train_data, encoding, params)
+
+test_data = pd.read_pickle(pickles_path + "encode_test.pkl") 
+thresh, score = IDS.find_best_thresh(model, encoding, test_data, 50)
+'''
 
 ## Informal Findings
 The following is an informal list of ideas that were tested during various stages of development.  These informal test guided my attempts to construct an optimal solution but were not exhaustively tested.
