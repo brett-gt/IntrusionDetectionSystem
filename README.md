@@ -3,7 +3,7 @@ Autoencoder based intrusion detection system trained and tested with the CICIDS2
 
 ## Current Best Network
 
-The current best network uses a two-layer sparse autoencoder with L1 kernel regularization on the hidden layer.  On data it has previously not seen, this network is capable of correctly identifying 91.3% of BENIGN data (8.7% false positive rate) and 98.3% of attacks (1.6% false negative rate).  
+The current best network uses a two-layer sparse autoencoder with L1 kernel regularization on the hidden layer.  On data it has previously not seen, this network is capable of correctly identifying 91.3% of BENIGN data (8.7% false positive rate) and 98.3% of attacks (1.7% false negative rate).  
 
 The ability of the network (trainined only on Day 1 BENIGN data) to detect specific attacks it had never seen before is shown below:  
 
