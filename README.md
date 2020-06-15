@@ -61,7 +61,7 @@ The following is an informal list of ideas that were tested during various stage
 
 2. Experimented with both L1 and L2 kernel and activity regularizers.  L2 kernel regularization showed improved results with a fully-connected network.  L1 activity regularized on just the hidden layer seemed to improve the sparse network. 
 
-3. Exerimented with fully connected and a sparse autoencoder architecture.  Sparsity applied to the encoding layer (with more neurons to start with) produced better results.
+3. Experimented with fully connected and a sparse autoencoder architecture.  Sparsity applied to the encoding layer (with more neurons to start with) produced better results.
 
 4. Tried quantile normalization.  Produced inferior results.  
 
